@@ -34,6 +34,12 @@ public class DepartmentController {
         model.addAttribute("teacherList",teacherService.getAllTeachForView());
         return "ManagerDepartment/index";
     }
+    @GetMapping("/deparment")
+    public String searchByDepartmentname(@PathVariable String searchString,Model model)
+    {
+        model.addAttribute("result",departmentService.searchByDepartmentname(searchString));
+        return "ManagerDepartment/index";
+    }
     @PostMapping("/addDepartment")
     public String addDepartment(@ModelAttribute("department") DepartmentDto departmentDto)
     {
@@ -61,6 +67,7 @@ public class DepartmentController {
         departmentService.updateDepartment(departmentDto);
         return "redirect:/department";
     }
+
 //    @PutMapping("/deparment")
 //    public ResponseEntity<Integer> updateDepartment(@RequestBody DepartmentDto departmentDto)
 //    {
