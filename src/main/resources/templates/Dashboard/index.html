@@ -20,12 +20,19 @@
         integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
 
     <link rel="stylesheet" th:href="@{/css/app-saas.min.css}" id="app-style">
 
     <link rel="stylesheet" th:href="@{/css/app.css}">
+    <link rel="stylesheet" th:href="@{/css/all.min.css}">
 
-
+    <link rel="stylesheet" th:href="@{/css/apexcharts.css}">
+    <script th:src="@{https://cdn.jsdelivr.net/npm/chart.js}"></script>
+    <link th:href="@{https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/css/bootstrap.min.css}" rel="stylesheet">
+    <script th:src="@{https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.min.js}"></script>
+    <script th:src="@{https://cdn.jsdelivr.net/npm/popper.js@2.11.6/dist/umd/popper.min.js}"></script>
 </head>
 
 <body>
@@ -176,56 +183,56 @@
                 <ul class="side-nav">
 
                     <li class="side-nav-item">
-                        <a href="/dashboard" class="side-nav-link">
+                        <a href="/dashboard" style="text-decoration: none;" class="side-nav-link">
                             <i class="uil-home-alt"></i>
                             <span> Dashboard </span>
                         </a>
                     </li>
 
                     <li class="side-nav-item ">
-                        <a href="/department" class="side-nav-link ">
+                        <a href="/department" style="text-decoration: none;" class="side-nav-link ">
                             <i class="uil-briefcase-alt"></i>
                             <span> Quản lý khoa </span>
                         </a>
                     </li>
 
                     <li class="side-nav">
-                        <a href="/major" class="side-nav-link">
+                        <a href="/major" style="text-decoration: none;" class="side-nav-link">
                             <i class="uil-bag"></i>
                             <span> Quản lý ngành </span>
                         </a>
                     </li>
 
                     <li class="side-nav-item">
-                        <a href="/classroom" class="side-nav-link">
+                        <a href="/classroom" style="text-decoration: none;" class="side-nav-link">
                             <i class="uil-receipt-alt"></i>
                             <span> Quản lý lớp </span>
                         </a>
                     </li>
 
                     <li class="side-nav-item">
-                        <a href="/subject" class="side-nav-link">
+                        <a href="/subject" style="text-decoration: none;" class="side-nav-link">
                             <i class="uil-swatchbook"></i>
                             <span> Quản lý môn học </span>
                         </a>
                     </li>
 
                     <li class="side-nav-item">
-                        <a href="/teacher" class="side-nav-link">
+                        <a href="/teacher" style="text-decoration: none;" class="side-nav-link">
                             <i class="uil-book-reader"></i>
                             <span> Quản lý giáo viên </span>
                         </a>
                     </li>
 
                     <li class="side-nav-item">
-                        <a href="/student" class="side-nav-link">
+                        <a href="/student" style="text-decoration: none;" class="side-nav-link">
                             <i class="uil-users-alt"></i>
                             <span> Quản lý sinh viên </span>
                         </a>
                     </li>
 
                     <li class="side-nav-item">
-                        <a href="/module_subject" class="side-nav-link">
+                        <a href="/module_subject" style="text-decoration: none;" class="side-nav-link">
                             <i class="uil-book-open"></i>
                             <span> Quản lý học phần </span>
                         </a>
@@ -319,34 +326,17 @@
 
                         </div>
 
-                        <div class="col-md-6">
-                            <div class="card">
-                                <div class="d-flex card-header justify-content-between align-items-center">
-                                    <h4 class="header-title">Môn học yêu thích</h4>
-                                </div>
 
-                                <div class="card-body pt-0">
-                                    <div class="table-responsive">
-                                        <table class="table table-centered table-nowrap table-hover mb-0">
-                                            <tbody>
-                                            </tbody>
-                                        </table>
-                                    </div> <!-- end table-responsive-->
-                                </div> <!-- end card-body-->
-                            </div>
-                        </div>
                         <div class="container">
                             <div class="row my-3">
                                 <div class="col">
                                     <h4>Bootstrap 5 Chart.js</h4>
                                 </div>
                             </div>
-                            <div class="row my-2">
-                                <div class="col-md-6 py-1">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <canvas id="chBar"></canvas>
-                                        </div>
+                            <div class="col-md-6 py-1">
+                                <div class="card">
+                                    <div class="card-body">
+                                        <canvas id="chLine"></canvas>
                                     </div>
                                 </div>
                             </div>
@@ -375,6 +365,11 @@
     </div>
 
     <script src="/js/vendor.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+        </script>
+    <script th:src="@{/js/apexcharts.min.js}" language="javascript"></script>
+
 
     <script src="/vendors/apexcharts/apexcharts.min.js"></script>
     <script src="/vendors/daterangepicker/daterangepicker.js"></script>
@@ -432,35 +427,45 @@
                 });
             });
         });
-        var chBar = document.getElementById("chBar");
-        if (chBar) {
-            new Chart(chBar, {
-                type: 'bar',
-                data: {
-                    labels: ["S", "M", "T", "W", "T", "F", "S"],
-                    datasets: [{
-                        data: [589, 445, 483, 503, 689, 692, 634],
-                        backgroundColor: colors[0]
-                    },
-                    {
-                        data: [639, 465, 493, 478, 589, 632, 674],
-                        backgroundColor: colors[1]
-                    }]
-                },
+
+
+    </script>
+    <script>
+        var colors = ['#007bff', '#28a745', '#333333', '#c3e6cb', '#dc3545', '#6c757d'];
+
+        /* large line chart */
+        var chLine = document.getElementById("chLine");
+        var chartData = {
+            labels: ["S", "M", "T", "W", "T", "F", "S"],
+            datasets: [{
+                data: [589, 445, 483, 503, 689, 692, 634],
+                backgroundColor: 'transparent',
+                borderColor: colors[0],
+                borderWidth: 4,
+                pointBackgroundColor: colors[0]
+            }
+
+            ]
+        };
+        if (chLine) {
+            new Chart(chLine, {
+                type: 'line',
+                data: chartData,
                 options: {
+                    scales: {
+                        xAxes: [{
+                            ticks: {
+                                beginAtZero: false
+                            }
+                        }]
+                    },
                     legend: {
                         display: false
                     },
-                    scales: {
-                        xAxes: [{
-                            barPercentage: 0.4,
-                            categoryPercentage: 0.5
-                        }]
-                    }
+                    responsive: true
                 }
             });
         }
-
     </script>
 </body>
 

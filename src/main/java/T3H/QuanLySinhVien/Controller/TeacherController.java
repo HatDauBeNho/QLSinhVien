@@ -32,8 +32,6 @@ public class TeacherController {
     @GetMapping("/teacher")
     public String getAllTeacher(Model model)
     {
-
-        String sql2="SELECT * FROM levels";
         model.addAttribute("levelList",levelService.getAllLevel());
         model.addAttribute("teacherList",teacherService.getAllTeachForView());
         return "ManagerTeacher/index";

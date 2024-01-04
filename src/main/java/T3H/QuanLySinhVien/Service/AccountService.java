@@ -1,6 +1,9 @@
 package T3H.QuanLySinhVien.Service;
 
+import T3H.QuanLySinhVien.Converter.TeacherConverter;
 import T3H.QuanLySinhVien.Entities.dao.AccountDao;
+import T3H.QuanLySinhVien.Entities.dto.AccountDto;
+import T3H.QuanLySinhVien.Entities.dto.InforDto;
 import T3H.QuanLySinhVien.Mapper.AccountMapper;
 import T3H.QuanLySinhVien.Converter.AccountConverter;
 import T3H.QuanLySinhVien.Repository.AccountRepository;
@@ -15,14 +18,13 @@ public class AccountService {
     @Autowired
     AccountRepository accountRepository;
 
-    public List<AccountConverter> getAllAccounts()
+    public TeacherConverter getUpdateTeacher()
     {
-        List<AccountConverter> list=new ArrayList<>();
-        for (AccountDao accountDao:accountRepository.findAll())
-        {
-            list.add(AccountMapper.mapAccount(accountDao));
-        }
-        return list;
+        return accountRepository.getUpdateTeacher();
+    }
+    public void updateAccount(InforDto inforDto, AccountDto accountDto)
+    {
+        accountRepository.updateAccount(inforDto,accountDto);
     }
 //    public List<Account> addAccount(Account account)
 //    {

@@ -59,7 +59,7 @@ public class TeacherRepositoryImpl implements TeacherRepository {
         MapSqlParameterSource nameParameters2=new MapSqlParameterSource()
                 .addValue("username",accountDto.getUsername())
                 .addValue("password",accountDto.getPassword())
-                .addValue("level_id",accountDto.getLevel_id())
+                .addValue("level_id",3)
                 .addValue("created_at", LocalDateTime.now())
                 .addValue("updated_at",LocalDateTime.now());
         namedParameterJdbcTemplate.update(accounts,nameParameters2);

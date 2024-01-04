@@ -371,13 +371,8 @@
                         <label class="form-label">Email</label>
                         <input type="text" class="form-control" name="email">
                     <div>
-                    <div class="col-md-6 mb-3">
-                        <label class="form-label">Chức vụ</label>
-                        <select th:id="levelDropdown" class="form-control" name = 'level_id'>
-                            <option th:each="level: ${levelList}" th:value="${level.level_id}" th:text="${level.level_name}"></option>
-                        </select>
-                    </div>
-                
+                  
+            
                     <div class="col-md-6 mb-3">
                         <label class="form-label">User name</label>
                         <input type="text" class="form-control" name="username">

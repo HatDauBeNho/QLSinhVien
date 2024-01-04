@@ -1,13 +1,6 @@
 package T3H.QuanLySinhVien.Repository;
-
 import T3H.QuanLySinhVien.Converter.ClassroomConverter;
-import T3H.QuanLySinhVien.Converter.MajorConverter;
-import T3H.QuanLySinhVien.Converter.TeacherConverter;
-import T3H.QuanLySinhVien.Entities.dao.ClassroomDao;
 import T3H.QuanLySinhVien.Entities.dto.ClassroomDto;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.repository.NoRepositoryBean;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
