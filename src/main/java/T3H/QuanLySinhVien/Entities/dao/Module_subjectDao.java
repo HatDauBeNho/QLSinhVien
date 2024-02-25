@@ -1,6 +1,7 @@
 package T3H.QuanLySinhVien.Entities.dao;
 
-import jakarta.persistence.*;
+import javax.persistence.*;
+
 import lombok.Data;
 import org.springframework.cglib.core.Local;
 

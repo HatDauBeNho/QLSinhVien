@@ -1,5 +1,6 @@
 package T3H.QuanLySinhVien.Service;
 
+import T3H.QuanLySinhVien.Converter.DepartmentConverter;
 import T3H.QuanLySinhVien.Converter.MajorConverter;
 import T3H.QuanLySinhVien.Entities.dao.MajorDao;
 import T3H.QuanLySinhVien.Entities.dto.MajorDto;
@@ -48,5 +49,10 @@ public class MajorService {
     public void deleteMajor(@PathVariable int id)
     {
         majorRepository.deleteMajorById(id);
+    }
+    public List<MajorConverter> searchByMajorname(@PathVariable String searchString)
+    {
+
+        return majorRepository.searchByMajorname(searchString);
     }
 }

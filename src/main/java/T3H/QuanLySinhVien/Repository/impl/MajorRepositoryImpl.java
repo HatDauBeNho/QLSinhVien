@@ -1,5 +1,6 @@
 package T3H.QuanLySinhVien.Repository.impl;
 
+import T3H.QuanLySinhVien.Converter.DepartmentConverter;
 import T3H.QuanLySinhVien.Converter.MajorConverter;
 import T3H.QuanLySinhVien.Entities.dto.MajorDto;
 import T3H.QuanLySinhVien.Repository.MajorRepository;
@@ -75,5 +76,20 @@ public class MajorRepositoryImpl implements MajorRepository {
         MapSqlParameterSource parameters = new MapSqlParameterSource()
                 .addValue("id", id);
         namedParameterJdbcTemplate.update(sql,parameters);
+    }
+
+    @Override
+    public List<MajorConverter> searchByMajorname(String searchString) {
+
+        String sql="SELECT m.major_id,m.major_name,d.department_name,i.fullname,m.created_at,m.updated_at" +
+                " FROM majors m" +
+                " LEFT OUTER JOIN departments d ON d.department_id = m.department_id" +
+                " LEFT OUTER JOIN teachers t ON m.teacher_id = t.teacher_id" +
+                " LEFT OUTER JOIN infors i on t.infor_id = i.infor_id" +
+                " WHERE m.major_name=:searchString";
+        MapSqlParameterSource parameters = new MapSqlParameterSource()
+                .addValue("searchString", searchString);
+        List<MajorConverter> list =  namedParameterJdbcTemplate.query(sql,parameters,new BeanPropertyRowMapper<>(MajorConverter.class));
+        return list;
     }
 }

@@ -18,9 +18,9 @@ public class AccountService {
     @Autowired
     AccountRepository accountRepository;
 
-    public TeacherConverter getUpdateTeacher()
+    public AccountConverter getUpdateAccount()
     {
-        return accountRepository.getUpdateTeacher();
+        return accountRepository.getUpdateAccount();
     }
     public void updateAccount(InforDto inforDto, AccountDto accountDto)
     {

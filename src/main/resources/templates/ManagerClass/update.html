@@ -115,7 +115,7 @@
                             </a>
 
                             <!-- item-->
-                            <a href="/dang-xuat" class="dropdown-item">
+                            <a href="/logout" class="dropdown-item">
                                 <i class="mdi mdi-logout me-1"></i>
                                 <span>Đăng xuất</span>
                             </a>
@@ -242,7 +242,7 @@
                     <div class="offcanvas-header">
                         <h5 class="offcanvas-title">Cập nhật lớp học</h5>
                     </div>
-                    <form th:action="@{/updateClassroom}" th:object="${classroom}" method="post">
+                    <form th:action="@{/admin/updateClassroom}" th:object="${classroom}" method="post">
                         <div class="offcanvas-body" >
                             <div class="row" style="margin: 0;">
             

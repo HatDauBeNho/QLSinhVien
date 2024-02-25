@@ -2,11 +2,12 @@ package T3H.QuanLySinhVien.Mapper;
 
 import T3H.QuanLySinhVien.Entities.dao.AccountDao;
 import T3H.QuanLySinhVien.Converter.AccountConverter;
+import T3H.QuanLySinhVien.Entities.dto.AccountDto;
 
 public class AccountMapper {
-    public static AccountConverter mapAccount(AccountDao accountDao)
+    public static AccountDto mapAccount(AccountDao accountDao)
     {
-        return new AccountConverter(
+        return new AccountDto(
                 accountDao.getAccount_id(),
                 accountDao.getUsername(),
                 accountDao.getPassword(),

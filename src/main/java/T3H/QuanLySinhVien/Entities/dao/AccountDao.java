@@ -1,11 +1,11 @@
 package T3H.QuanLySinhVien.Entities.dao;
 
-import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Comment;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity

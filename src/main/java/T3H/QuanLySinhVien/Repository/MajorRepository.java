@@ -1,5 +1,6 @@
 package T3H.QuanLySinhVien.Repository;
 
+import T3H.QuanLySinhVien.Converter.DepartmentConverter;
 import T3H.QuanLySinhVien.Converter.MajorConverter;
 import T3H.QuanLySinhVien.Entities.dao.MajorDao;
 import T3H.QuanLySinhVien.Entities.dto.MajorDto;
@@ -19,4 +20,6 @@ public interface MajorRepository  {
     int  updateMajor(MajorDto majorDto);
     MajorDto getMajorById(@PathVariable int id);
     void deleteMajorById(@PathVariable int id);
+    List<MajorConverter> searchByMajorname(String searchString);
+
 }

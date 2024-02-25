@@ -1,4 +1,5 @@
 package T3H.QuanLySinhVien.Repository.impl;
+import T3H.QuanLySinhVien.Converter.DepartmentConverter;
 import T3H.QuanLySinhVien.Converter.StudentConverter;
 import T3H.QuanLySinhVien.Entities.dto.AccountDto;
 import T3H.QuanLySinhVien.Entities.dto.InforDto;
@@ -107,11 +108,7 @@ public class StudentRepositoryImpl implements StudentRepository {
 
     @Override
     public void deleteStudentById(int id) {
-//        String sql = "DELETE infors, accounts, students" +
-//                " FROM infors" +
-//                " JOIN accounts ON infors.infor_id = accounts.account_id" +
-//                " JOIN students ON accounts.account_id = students.account_id" +
-//                " WHERE students.student_id =:id";
+
         String sql1="DELETE FROM infors WHERE infor_id IN (SELECT infor_id FROM students WHERE student_id =:id)";
         String sql2="DELETE FROM accounts WHERE account_id IN (SELECT account_id FROM students WHERE student_id =:id)";
         String sql3="DELETE FROM students WHERE student_id =:id";
@@ -120,5 +117,20 @@ public class StudentRepositoryImpl implements StudentRepository {
         namedParameterJdbcTemplate.update(sql1,parameters);
         namedParameterJdbcTemplate.update(sql2,parameters);
         namedParameterJdbcTemplate.update(sql3,parameters);
+    }
+
+    @Override
+    public List<StudentConverter> searchByStudentname(String searchString) {
+
+        String sql="SELECT s.student_id,i.fullname,i.date_of_birth,i.gender,i.address,i.phone_number,i.email,s.gpa,c.class_name\n" +
+                "FROM students s\n" +
+                "LEFT OUTER JOIN infors i ON s.infor_id=i.infor_id\n" +
+                "left outer join class_rooms c on s.class_id=c.class_id" +
+                " ORDER BY s.student_id" +
+                " where i.fullname=:searchString";
+        MapSqlParameterSource parameters = new MapSqlParameterSource()
+                .addValue("searchString", searchString);
+        List<StudentConverter> list =  namedParameterJdbcTemplate.query(sql,parameters,new BeanPropertyRowMapper<>(StudentConverter.class));
+        return list;
     }
 }

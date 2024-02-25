@@ -25,15 +25,15 @@ public class AccountController {
     @Autowired
     NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
-    @GetMapping("/account")
+    @GetMapping("account")
     public String getUpdateTeacher( Model model)
     {
 
-        model.addAttribute("teacher",accountService.getUpdateTeacher());
+        model.addAttribute("account",accountService.getUpdateAccount());
 
         return "Dashboard/infor";
     }
-    @PostMapping("/updateAccount")
+    @PostMapping("updateAccount")
     public String updateAccount(@ModelAttribute("infor") InforDto inforDto,
                                 @ModelAttribute("account") AccountDto accountDto)
     {

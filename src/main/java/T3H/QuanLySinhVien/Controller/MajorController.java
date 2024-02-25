@@ -16,6 +16,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -31,7 +32,7 @@ public class MajorController {
 
     @Autowired
     NamedParameterJdbcTemplate namedParameterJdbcTemplate;
-    @GetMapping("/major")
+    @GetMapping("/admin/major")
     public String getAllMajor(Model model)
     {
         model.addAttribute("majorList",majorService.getAllMajorForView());
@@ -39,21 +40,29 @@ public class MajorController {
         model.addAttribute("departmentList",departmentService.getAllDepartment());
         return "ManagerMajor/index";
     }
-    @PostMapping("/addMajor")
+    @GetMapping("/admin/searchMajor")
+    public String searchByMajorname(@RequestParam(name = "searchString", required = false) String searchString, Model model)
+    {
+        List<MajorConverter> newMajorList = majorService.searchByMajorname(searchString);
+        model.addAttribute("majorList", new ArrayList<>());
+        model.addAttribute("majorList", newMajorList);
+        return "ManagerMajor/index";
+    }
+    @PostMapping("/admin/addMajor")
     public String addMajor(@ModelAttribute("major") MajorDto majorDto) {
 
         majorService.addMajor(majorDto);
         return "redirect:/major"; // Chuyển hướng về trang danh sách lớp học sau khi thêm mới
     }
 
-    @PostMapping("/deleteMajor")
+    @PostMapping("/admin/deleteMajor")
     public String deleteMajor(@RequestParam int id)
     {
         majorService.deleteMajor(id);
         return "redirect:/major";
     }
 
-    @GetMapping("/updateMajorForm/{id}")
+    @GetMapping("/admin/updateMajorForm/{id}")
     public String getUpdateMajor(@PathVariable Integer id, Model model)
     {
         model.addAttribute("major", majorService.getMajorById(id));
@@ -61,7 +70,7 @@ public class MajorController {
         model.addAttribute("teacherList",teacherService.getAllTeachForView());
         return "ManagerMajor/update";
     }
-    @PostMapping("/updateMajor")
+    @PostMapping("/admin/updateMajor")
     public String updateMajor(@ModelAttribute("major") MajorDto majorDto)
     {
         majorService.updateMajor(majorDto);

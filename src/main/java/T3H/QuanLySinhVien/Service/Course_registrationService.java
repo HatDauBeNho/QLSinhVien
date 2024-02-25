@@ -1,37 +1,26 @@
 package T3H.QuanLySinhVien.Service;
 
-import T3H.QuanLySinhVien.Entities.dao.Course_registrationDao;
-import T3H.QuanLySinhVien.Mapper.Course_registrationMapper;
+
 import T3H.QuanLySinhVien.Converter.Course_registrationConverter;
+import T3H.QuanLySinhVien.Entities.dto.Module_subjectDto;
 import T3H.QuanLySinhVien.Repository.Course_registrationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 import java.util.List;
 
 @Service
 public class Course_registrationService {
     @Autowired
-    Course_registrationRepository courseRegistrationRepository;
-
-    public List<Course_registrationConverter> getAllCourse_registration()
-
+    Course_registrationRepository course_registrationRepository;
+    public List<Course_registrationConverter> getAllCourse_registrationForView()
     {
-        List<Course_registrationConverter> list=new ArrayList<>();
-        for (Course_registrationDao courseRegistrationDao:courseRegistrationRepository.findAll())
-        {
-            list.add(Course_registrationMapper.mapCourse_registration(courseRegistrationDao));
-        }
-        return list;
+        return  course_registrationRepository.getAllCourse_registrationForView();
     }
-//    public List<Course_registration> addCourse_registration(Course_registration courseRegistration)
-//    {
-//        return courseRegistrationRepository.addCourse_registration(courseRegistration);
-//    }
-//
-//    public List<Course_registration> deleteCourse_registration(int id)
-//    {
-//        return courseRegistrationRepository.deleteCourse_registration(id);
-//    }
+    public  void plusCurrentStudent(Module_subjectDto module_subjectDto)
+    {
+        course_registrationRepository.plusCurrentStudent(module_subjectDto);
+    }
 }
+

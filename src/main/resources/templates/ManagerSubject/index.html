@@ -113,14 +113,14 @@
                             </div>
 
                             <!-- item-->
-                            <a href="/account" class="dropdown-item btn-show-profile">
+                            <a href="/admin/account" class="dropdown-item btn-show-profile">
                                 
                                 <i class="mdi mdi-account-circle me-1"></i>
                                 <span>Tài khoản của tôi</span>
                             </a>
 
                             <!-- item-->
-                            <a href="/logout" class="dropdown-item">
+                            <a href="/admin/logout" class="dropdown-item">
                                 <i class="mdi mdi-logout me-1"></i>
                                 <span>Đăng xuất</span>
                             </a>
@@ -177,61 +177,66 @@
                 <ul class="side-nav">
 
                     <li class="side-nav-item">
-                        <a href="/dashboard" class="side-nav-link">
+                        <a href="/admin/dashboard" class="side-nav-link">
                             <i class="uil-home-alt"></i>
                             <span> Dashboard </span>
                         </a>
                     </li>
 
                     <li class="side-nav-item ">
-                        <a href="/department" class="side-nav-link ">
+                        <a href="/admin/department" class="side-nav-link ">
                             <i class="uil-briefcase-alt"></i>
                             <span> Quản lý khoa </span>
                         </a>
                     </li>
 
                     <li class="side-nav-item">
-                        <a href="/major" class="side-nav-link">
+                        <a href="/admin/major" class="side-nav-link">
                             <i class="uil-bag"></i>
                             <span> Quản lý ngành </span>
                         </a>
                     </li>
 
                     <li class="side-nav-item">
-                        <a href="/classroom" class="side-nav-link">
+                        <a href="/admin/classroom" class="side-nav-link">
                             <i class="uil-receipt-alt"></i>
                             <span> Quản lý lớp </span>
                         </a>
                     </li>
 
                     <li class="side-nav-item">
-                        <a href="/subject" class="side-nav-link">
+                        <a href="/admin/subject" class="side-nav-link">
                             <i class="uil-swatchbook"></i>
                             <span> Quản lý môn học </span>
                         </a>
                     </li>
 
                     <li class="side-nav-item">
-                        <a href="/teacher" class="side-nav-link">
+                        <a href="/admin/teacher" class="side-nav-link">
                             <i class="uil-book-reader"></i>
                             <span> Quản lý giáo viên </span>
                         </a>
                     </li>
 
                     <li class="side-nav-item">
-                        <a href="/student" class="side-nav-link">
+                        <a href="/admin/student" class="side-nav-link">
                             <i class="uil-users-alt"></i>
                             <span> Quản lý sinh viên </span>
                         </a>
                     </li>
 
                     <li class="side-nav-item">
-                        <a href="/module_subject" class="side-nav-link">
+                        <a href="/admin/module_subject" class="side-nav-link">
                             <i class="uil-book-open"></i>
                             <span> Quản lý học phần </span>
                         </a>
                     </li>
-
+                    <li class="side-nav-item">
+                        <a href="/admin/showChart" class="side-nav-link">
+                            <i class="uil-book-open"></i>
+                            <span> Biểu đồ Số Tín Chỉ Môn học </span>
+                        </a>
+                    </li>
                 </ul>
 
                 <div class="clearfix"></div>
@@ -258,7 +263,12 @@
                                 môn học</button>
                         </div>
                     </div>
-
+                    <form th:action="@{/admin/searchSubject}" th:object="${subject}"  method="get" style="display: flex; width: 50%;  height: 30px; margin-bottom: 16px;">
+                        <input style="margin-right: 20px;" type="text" class="form-control" placeholder="Nhập tên môn học" th:name="searchString"  />
+                        <button type="submit" style="padding: 6px 9px; width: auto;" class="btn btn-primary btn-show-delete-deparment">
+                            Tìm
+                        </button>
+                    </form>
                     <div class="row">
                         <div class="col-12 table-responsive">
                             <table id="subject-table" class="table table-bordered table-centered mb-0 text-nowrap">
@@ -279,13 +289,13 @@
                                         <th>[[${subject.department_name}]]</th>
                                         <th>
                                             <div style="display: flex; gap: 10px;">
-                                                <a th:href="@{'/updateSubjectForm/' + ${subject.subject_id}}">
+                                                <a th:href="@{'/admin/updateSubjectForm/' + ${subject.subject_id}}">
                                                     <button type="submit" style="padding: 6px 8px;"
                                                         class="btn btn-primary btn-show-edit-subject">
                                                         <i class="fa-sharp fa-solid fa-pen-to-square"></i>
                                                     </button>
                                                 </a>
-                                                <form th:action="@{/deleteSubject}" method="post">
+                                                <form th:action="@{/admin/deleteSubject}" method="post">
                                                     <input type="hidden" th:name="id" th:value="${subject.subject_id}" />
                                                     <button type="submit" style="padding: 6px 9px;" class="btn btn-primary btn-show-delete-subject"
                                                         onclick="return confirm('Bạn có chắc chắn muốn xóa môn học này?')">
@@ -324,7 +334,7 @@
             <h5 class="offcanvas-title">Thêm môn học</h5>
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
-        <form th:action="@{/addSubject}" th:object="${subject}"  method="post">
+        <form th:action="@{/admin/addSubject}" th:object="${subject}"  method="post">
             <div class="offcanvas-body">
                 <div class="row">
 

@@ -4,6 +4,8 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface DashboardRepository {
+    String getUserName();
+
     int countDepartment();
     int countMajor();
     int countTeacher();

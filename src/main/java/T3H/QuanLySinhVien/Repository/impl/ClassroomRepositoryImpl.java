@@ -1,5 +1,6 @@
 package T3H.QuanLySinhVien.Repository.impl;
 import T3H.QuanLySinhVien.Converter.ClassroomConverter;
+import T3H.QuanLySinhVien.Converter.ClassroomConverter;
 import T3H.QuanLySinhVien.Entities.dto.ClassroomDto;
 import T3H.QuanLySinhVien.Repository.ClassroomRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,5 +86,26 @@ public class ClassroomRepositoryImpl implements ClassroomRepository {
         MapSqlParameterSource parameters = new MapSqlParameterSource()
                 .addValue("id", id);
         namedParameterJdbcTemplate.update(sql,parameters);
+    }
+    @Override
+    public List<ClassroomConverter> searchByClassroomname(String searchString) {
+        String sql = "SELECT "
+                + " c.class_id,"
+                + " c.class_name,"
+                + " c.quantity,"
+                + " m.major_name,"
+                + " d.department_name,"
+                + " i.fullname,"
+                + " i.phone_number"
+                + " FROM class_rooms c"
+                + " LEFT OUTER JOIN teachers t ON c.teacher_id = t.teacher_id"
+                + " LEFT OUTER JOIN infors i ON t.infor_id = i.infor_id"
+                + " LEFT OUTER JOIN majors m ON c.major_id = m.major_id"
+                + " LEFT OUTER JOIN departments d ON m.department_id=d.department_id" +
+                " where c.class_name=:searchString";
+        MapSqlParameterSource parameters = new MapSqlParameterSource()
+                .addValue("searchString", searchString);
+        List<ClassroomConverter> list =  namedParameterJdbcTemplate.query(sql,parameters,new BeanPropertyRowMapper<>(ClassroomConverter.class));
+        return list;
     }
 }

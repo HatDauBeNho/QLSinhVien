@@ -1,22 +1,22 @@
 package T3H.QuanLySinhVien.Controller;
 
-import T3H.QuanLySinhVien.Converter.ClassroomConverter;
+
 import T3H.QuanLySinhVien.Converter.StudentConverter;
 import T3H.QuanLySinhVien.Entities.dto.*;
 import T3H.QuanLySinhVien.Service.ClassroomService;
 import T3H.QuanLySinhVien.Service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
+
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.jdbc.support.GeneratedKeyHolder;
-import org.springframework.jdbc.support.KeyHolder;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.ParseException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -28,14 +28,22 @@ public class StudentController {
     ClassroomService classroomService;
     @Autowired
     NamedParameterJdbcTemplate namedParameterJdbcTemplate;
-    @GetMapping("/student")
+    @GetMapping("/admin/student")
     public String getAllStudent(Model model)
     {
         model.addAttribute("classroomList",classroomService.getAllClassroom());
         model.addAttribute("studentList",studentService.getAllStudentForView());
         return "ManagerStudent/index";
     }
-    @PostMapping("/addStudent")
+    @GetMapping("/admin/searchStudent")
+    public String searchByStudentname(@RequestParam(name = "searchString", required = false) String searchString, Model model)
+    {
+        List<StudentConverter> newStudentList = studentService.searchByStudentname(searchString);
+        model.addAttribute("studentList", new ArrayList<>());
+        model.addAttribute("studentList", newStudentList);
+        return "ManagerStudent/index";
+    }
+    @PostMapping("/admin/addStudent")
     public String addStudent(@ModelAttribute("student") StudentDto studentDto,
                              @ModelAttribute("account") AccountDto accountDto,
                              @ModelAttribute("infor") InforDto inforDto)
@@ -43,20 +51,20 @@ public class StudentController {
         studentService.addStudent(studentDto,accountDto,inforDto);
         return "redirect:/student"; // Chuyển hướng về trang danh sách lớp học sau khi thêm mới
     }
-    @PostMapping("/deleteStudent")
+    @PostMapping("/admin/deleteStudent")
     public String deleteStudent(@RequestParam int id)
     {
         studentService.deleteStudent(id);
         return "redirect:/student";
     }
 
-    @GetMapping("/updateStudentForm/{id}")
+    @GetMapping("/admin/updateStudentForm/{id}")
     public String getUpdateStudent(@PathVariable Integer id, Model model) {
 
         model.addAttribute("student", studentService.getStudentById(id));
         return "ManagerStudent/update";
     }
-    @PostMapping("/updateStudent")
+    @PostMapping("/admin/updateStudent")
     public String updateStudent(@ModelAttribute("student") StudentDto studentDto,
                                 @ModelAttribute("infor") InforDto inforDto)
     {

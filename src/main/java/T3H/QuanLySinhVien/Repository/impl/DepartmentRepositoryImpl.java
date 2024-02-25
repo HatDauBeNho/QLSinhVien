@@ -75,15 +75,15 @@ public class DepartmentRepositoryImpl implements DepartmentRepository {
     }
 
     @Override
-    public DepartmentConverter searchByDepartmentname(String searchString) {
+    public List<DepartmentConverter> searchByDepartmentname(String searchString) {
         String sql="SELECT d.department_id, d.department_name, i.fullname, d.created_at, d.updated_at" +
                 " FROM departments d" +
                 " LEFT OUTER JOIN teachers t ON d.teacher_id = t.teacher_id" +
                 " LEFT OUTER JOIN infors i on t.infor_id = i.infor_id" +
-                " where department_name:=searchString";
+                " where d.department_name = :searchString";
         MapSqlParameterSource parameters = new MapSqlParameterSource()
                 .addValue("searchString", searchString);
-        List<DepartmentConverter> li=namedParameterJdbcTemplate.query(sql,new BeanPropertyRowMapper<>(DepartmentConverter.class));
-        return  li.get(0);
+        List<DepartmentConverter> list =  namedParameterJdbcTemplate.query(sql,parameters,new BeanPropertyRowMapper<>(DepartmentConverter.class));
+        return list;
     }
 }

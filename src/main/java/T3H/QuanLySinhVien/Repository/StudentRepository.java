@@ -1,5 +1,6 @@
 package T3H.QuanLySinhVien.Repository;
 
+import T3H.QuanLySinhVien.Converter.DepartmentConverter;
 import T3H.QuanLySinhVien.Converter.StudentConverter;
 import T3H.QuanLySinhVien.Entities.dao.StudentDao;
 import T3H.QuanLySinhVien.Entities.dto.AccountDto;
@@ -21,4 +22,6 @@ public interface StudentRepository  {
     int  updateStudent(StudentDto studentDto, InforDto inforDto);
     StudentConverter getStudentById(@PathVariable int id);
     void deleteStudentById(@RequestParam int id);
+    List<StudentConverter> searchByStudentname(String searchString);
+
 }

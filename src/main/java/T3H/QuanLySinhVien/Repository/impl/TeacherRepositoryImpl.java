@@ -1,5 +1,6 @@
 package T3H.QuanLySinhVien.Repository.impl;
 
+import T3H.QuanLySinhVien.Converter.DepartmentConverter;
 import T3H.QuanLySinhVien.Converter.TeacherConverter;
 import T3H.QuanLySinhVien.Entities.dto.AccountDto;
 import T3H.QuanLySinhVien.Entities.dto.InforDto;
@@ -115,5 +116,20 @@ public class TeacherRepositoryImpl implements TeacherRepository {
         namedParameterJdbcTemplate.update(sql1,parameters);
         namedParameterJdbcTemplate.update(sql2,parameters);
         namedParameterJdbcTemplate.update(sql3,parameters);
+    }
+
+    @Override
+    public List<TeacherConverter> searchByTeachername(String searchString) {
+
+        String sql="SELECT t.teacher_id,i.fullname, i.date_of_birth,i.gender,i.address,i.phone_number,i.email,l.level_name " +
+                "FROM teachers t " +
+                "LEFT OUTER JOIN infors i ON t.infor_id=i.infor_id " +
+                "LEFT OUTER JOIN accounts a ON t.account_id=a.account_id" +
+                " LEFT OUTER JOIN levels l ON l.level_id=a.level_id" +
+                " where i.fullname=:searchString";
+        MapSqlParameterSource parameters = new MapSqlParameterSource()
+                .addValue("searchString", searchString);
+        List<TeacherConverter> list =  namedParameterJdbcTemplate.query(sql,parameters,new BeanPropertyRowMapper<>(TeacherConverter.class));
+        return list;
     }
 }

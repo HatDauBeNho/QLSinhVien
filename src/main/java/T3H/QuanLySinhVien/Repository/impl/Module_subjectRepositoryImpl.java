@@ -1,5 +1,6 @@
 package T3H.QuanLySinhVien.Repository.impl;
 
+import T3H.QuanLySinhVien.Converter.DepartmentConverter;
 import T3H.QuanLySinhVien.Converter.Module_subjectConverter;
 import T3H.QuanLySinhVien.Entities.dto.Module_subjectDto;
 import T3H.QuanLySinhVien.Repository.Module_subjectRepository;
@@ -18,7 +19,7 @@ public class Module_subjectRepositoryImpl implements Module_subjectRepository {
     NamedParameterJdbcTemplate namedParameterJdbcTemplate;
     @Override
     public List<Module_subjectConverter> getAllModule_subjectForView() {
-        String sql="SELECT m.module_subject_id, s.subject_name, m.current_student,i.fullname,m.start_at,m.end_at,m.created_at\n" +
+        String sql="SELECT m.module_subject_id, s.subject_name, m.current_student,m.maximum_student,i.fullname,m.start_at,m.end_at,m.created_at\n" +
                 "FROM module_subjects m\n" +
                 "LEFT OUTER JOIN subjects s ON s.subject_id=m.subject_id\n" +
                 "LEFT OUTER JOIN teachers t on m.teacher_id=t.teacher_id\n" +
@@ -80,5 +81,19 @@ public class Module_subjectRepositoryImpl implements Module_subjectRepository {
         MapSqlParameterSource parameters = new MapSqlParameterSource()
                 .addValue("id", id);
         namedParameterJdbcTemplate.update(sql,parameters);
+    }
+
+    @Override
+    public List<Module_subjectConverter> searchByModule_subjectname(String searchString) {
+        String sql="SELECT m.module_subject_id, s.subject_name, m.current_student,i.fullname,m.start_at,m.end_at,m.created_at\n" +
+                "FROM module_subjects m\n" +
+                "LEFT OUTER JOIN subjects s ON s.subject_id=m.subject_id\n" +
+                "LEFT OUTER JOIN teachers t on m.teacher_id=t.teacher_id\n" +
+                "LEFT OUTER JOIN infors i on t.infor_id=i.infor_id\n" +
+                "where s.subject_name=:searchString";
+        MapSqlParameterSource parameters = new MapSqlParameterSource()
+                .addValue("searchString", searchString);
+        List<Module_subjectConverter> list =  namedParameterJdbcTemplate.query(sql,parameters,new BeanPropertyRowMapper<>(Module_subjectConverter.class));
+        return list;
     }
 }

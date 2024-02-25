@@ -5,6 +5,7 @@ import T3H.QuanLySinhVien.Converter.TeacherConverter;
 import T3H.QuanLySinhVien.Entities.dto.DepartmentDto;
 import T3H.QuanLySinhVien.Service.DepartmentService;
 import T3H.QuanLySinhVien.Service.TeacherService;
+import org.apache.logging.log4j.message.Message;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
@@ -14,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -27,33 +29,35 @@ public class DepartmentController {
     @Autowired
     NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
-    @GetMapping("/department")
+    @GetMapping("/admin/department")
     public String getAllDepartment(Model model)
     {
         model.addAttribute("departmentList",departmentService.getAllDepartmentForView());
         model.addAttribute("teacherList",teacherService.getAllTeachForView());
         return "ManagerDepartment/index";
     }
-    @GetMapping("/deparment")
-    public String searchByDepartmentname(@PathVariable String searchString,Model model)
+    @GetMapping("/admin/searchDepartment")
+    public String searchByDepartmentname(@RequestParam(name = "searchString", required = false) String searchString, Model model)
     {
-        model.addAttribute("result",departmentService.searchByDepartmentname(searchString));
+        List<DepartmentConverter> newDepartmentList = departmentService.searchByDepartmentname(searchString);
+        model.addAttribute("departmentList", new ArrayList<>());
+        model.addAttribute("departmentList", newDepartmentList);
         return "ManagerDepartment/index";
     }
-    @PostMapping("/addDepartment")
+    @PostMapping("/admin/addDepartment")
     public String addDepartment(@ModelAttribute("department") DepartmentDto departmentDto)
     {
         departmentService.addDepartment(departmentDto);
-        return "redirect:/department";
+        return "redirect:/admin/department";
     }
 
-    @PostMapping("/deleteDepartment")
+    @PostMapping("/admin/deleteDepartment")
     public String deleteDepartment(@RequestParam int id)
     {
         departmentService.deleteDepartment(id);
-        return "redirect:/department";
+        return "redirect:/admin/department";
     }
-    @GetMapping("/updateDepartmentForm/{id}")
+    @GetMapping("/admin/updateDepartmentForm/{id}")
     public String getUpdateDepartment(@PathVariable Integer id, Model model)
     {
 
@@ -61,11 +65,11 @@ public class DepartmentController {
         model.addAttribute("teacherList",teacherService.getAllTeachForView());
         return "ManagerDepartment/update";
     }
-    @PostMapping("/updateDepartment")
+    @PostMapping("/admin/updateDepartment")
     public String updateClassroom(@ModelAttribute("department") DepartmentDto departmentDto)
     {
         departmentService.updateDepartment(departmentDto);
-        return "redirect:/department";
+        return "redirect:/admin/department";
     }
 
 //    @PutMapping("/deparment")

@@ -50,8 +50,9 @@ public class DepartmentService {
     {
         departmentRepository.deleteDepartmentById(id);
     }
-    public DepartmentConverter searchByDepartmentname(@PathVariable String searchString)
+    public List<DepartmentConverter> searchByDepartmentname(@PathVariable String searchString)
     {
+
         return departmentRepository.searchByDepartmentname(searchString);
     }
 }

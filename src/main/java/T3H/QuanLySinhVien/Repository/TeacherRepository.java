@@ -1,5 +1,6 @@
 package T3H.QuanLySinhVien.Repository;
 
+import T3H.QuanLySinhVien.Converter.DepartmentConverter;
 import T3H.QuanLySinhVien.Converter.TeacherConverter;
 import T3H.QuanLySinhVien.Entities.dao.TeacherDao;
 import T3H.QuanLySinhVien.Entities.dto.AccountDto;
@@ -22,5 +23,6 @@ public interface TeacherRepository
     int  updateTeacher(TeacherDto teacherDto, InforDto inforDto);
     TeacherConverter getTeacherById(@PathVariable int id);
     void deleteTeacherById(@RequestParam int id);
+    List<TeacherConverter> searchByTeachername(String searchString);
 
 }

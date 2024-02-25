@@ -1,21 +1,16 @@
 package T3H.QuanLySinhVien.Controller;
 
 import T3H.QuanLySinhVien.Converter.ClassroomConverter;
-import T3H.QuanLySinhVien.Converter.MajorConverter;
-import T3H.QuanLySinhVien.Converter.TeacherConverter;
 import T3H.QuanLySinhVien.Entities.dto.ClassroomDto;
 import T3H.QuanLySinhVien.Service.ClassroomService;
 import T3H.QuanLySinhVien.Service.MajorService;
 import T3H.QuanLySinhVien.Service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
-import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -33,33 +28,41 @@ public class ClassroomController {
     NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
 
-    @GetMapping("/classroom")
+    @GetMapping("/admin/classroom")
     public String getAllClassroom(Model model) {
         model.addAttribute("classroomList", classroomService.getAllClassroomForView());
         model.addAttribute("majorList", majorService.getAllMajor());
         model.addAttribute("teacherList",teacherService.getAllTeachForView());
         return "ManagerClass/index";
     }
-    @PostMapping("/addClassroom")
+    @GetMapping("/admin/searchClassroom")
+    public String searchByClassroomname(@RequestParam(name = "searchString", required = false) String searchString, Model model)
+    {
+        List<ClassroomConverter> newClassroomList = classroomService.searchByClassroomname(searchString);
+        model.addAttribute("classroomList", new ArrayList<>());
+        model.addAttribute("classroomList", newClassroomList);
+        return "ManagerClass/index";
+    }
+    @PostMapping("/admin/addClassroom")
     public String addClassroom(@ModelAttribute("classroom") ClassroomDto classroomDto) {
         classroomService.addClassroom(classroomDto);
         return "redirect:/classroom"; // Chuyển hướng về trang danh sách lớp học sau khi thêm mới
     }
 
-    @PostMapping("/deleteClassroom")
+    @PostMapping("/admin/deleteClassroom")
     public String deleteClassroom(@RequestParam int id) {
         classroomService.deleteClassroomById(id);
         return "redirect:/classroom";
     }
 
-    @GetMapping("/updateClassroomForm/{id}")
+    @GetMapping("/admin/updateClassroomForm/{id}")
     public String getUpdateClassroom(@PathVariable Integer id, Model model) {
         model.addAttribute("classroom", classroomService.getClassroomById(id));
         model.addAttribute("majorList", majorService.getAllMajor());
         model.addAttribute("teacherList", teacherService.getAllTeachForView());
         return "ManagerClass/update";
     }
-    @PostMapping("/updateClassroom")
+    @PostMapping("/admin/updateClassroom")
     public String updateClassroom(@ModelAttribute("classroom") ClassroomDto classroomDto) {
         classroomService.updateClassroom(classroomDto);
         return "redirect:/classroom";

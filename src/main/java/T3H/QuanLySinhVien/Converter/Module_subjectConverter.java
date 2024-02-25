@@ -16,6 +16,7 @@ public class Module_subjectConverter {
     private int module_subject_id;
     private String subject_name;
     private int current_student;
+    private int maximum_student;
     private String fullname;
 
     private LocalDate start_at;

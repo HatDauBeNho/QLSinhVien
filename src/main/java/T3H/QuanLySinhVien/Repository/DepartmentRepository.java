@@ -19,6 +19,6 @@ public interface DepartmentRepository {
     int  updateDepartment(DepartmentDto departmentDto);
     DepartmentDto getDepartmentById(@PathVariable int id);
     void deleteDepartmentById(@RequestParam int id);
-    DepartmentConverter searchByDepartmentname(String name);
+    List<DepartmentConverter> searchByDepartmentname(String searchString);
 
 }

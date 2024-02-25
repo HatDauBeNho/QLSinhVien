@@ -1,4 +1,5 @@
 package T3H.QuanLySinhVien.Repository.impl;
+import T3H.QuanLySinhVien.Converter.DepartmentConverter;
 import T3H.QuanLySinhVien.Converter.SubjectConverter;
 import T3H.QuanLySinhVien.Entities.dto.SubjectDto;
 import T3H.QuanLySinhVien.Repository.SubjectRepository;
@@ -70,5 +71,18 @@ public class SubjectRepositoryImpl implements SubjectRepository {
         MapSqlParameterSource parameters = new MapSqlParameterSource()
                 .addValue("id", id);
         namedParameterJdbcTemplate.update(sql,parameters);
+    }
+
+    @Override
+    public List<SubjectConverter> searchBySubjectname(String searchString) {
+
+        String sql="SELECT s.subject_id,s.subject_name,s.credit_hour,d.department_name" +
+                " FROM subjects s" +
+                " LEFT OUTER JOIN departments d ON d.department_id = s.department_id" +
+                " where s.subject_name=:searchString";
+        MapSqlParameterSource parameters = new MapSqlParameterSource()
+                .addValue("searchString", searchString);
+        List<SubjectConverter> list =  namedParameterJdbcTemplate.query(sql,parameters,new BeanPropertyRowMapper<>(SubjectConverter.class));
+        return list;
     }
 }

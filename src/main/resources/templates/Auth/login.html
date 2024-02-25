@@ -46,9 +46,8 @@
                                     <p class="text-muted mb-4">Đăng nhập để truy cập vào quyền quản trị</p>
                                 </div>
     
-                                <form th:action="@{/login}" method="post">
-    
-                                    
+                                <form th:action="@{/j_spring_security_check}" method="post">
+                                <!-- <form th:action="@{/login}" method="post"> -->
                                     <div class="mb-3">
                                         <label for="emailaddress" class="form-label">Tên đăng nhập</label>
                                         <input  class="form-control" type="text" name="username" placeholder="Nhập tên đăng nhập">                                      

@@ -1,5 +1,6 @@
 package T3H.QuanLySinhVien.Repository;
 
+import T3H.QuanLySinhVien.Converter.DepartmentConverter;
 import T3H.QuanLySinhVien.Converter.Module_subjectConverter;
 import T3H.QuanLySinhVien.Entities.dao.Module_subjectDao;
 import T3H.QuanLySinhVien.Entities.dto.Module_subjectDto;
@@ -19,4 +20,6 @@ public interface Module_subjectRepository  {
     int  updateModule_subject(Module_subjectDto module_subjectDto);
     Module_subjectDto getModule_subjectById(@PathVariable int id);
     void deleteModule_subjectById(@RequestParam int id);
+    List<Module_subjectConverter> searchByModule_subjectname(String searchString);
+
 }

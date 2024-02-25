@@ -109,13 +109,13 @@
 
                             <!-- item-->
                             <a href="javascript:void(0);" class="dropdown-item btn-show-profile"
-                                data-url="/load-profile">
+                                data-url="/admin/account">
                                 <i class="mdi mdi-account-circle me-1"></i>
                                 <span>Tài khoản của tôi</span>
                             </a>
 
                             <!-- item-->
-                            <a href="/dang-xuat" class="dropdown-item">
+                            <a href="/admin/logout" class="dropdown-item">
                                 <i class="mdi mdi-logout me-1"></i>
                                 <span>Đăng xuất</span>
                             </a>
@@ -172,56 +172,56 @@
                 <ul class="side-nav">
 
                     <li class="side-nav-item">
-                        <a href="/" class="side-nav-link">
+                        <a href="/admin/dashboard" class="side-nav-link">
                             <i class="uil-home-alt"></i>
                             <span> Dashboard </span>
                         </a>
                     </li>
 
                     <li class="side-nav-item ">
-                        <a href="/department" class="side-nav-link ">
+                        <a href="/admin/department" class="side-nav-link ">
                             <i class="uil-briefcase-alt"></i>
                             <span> Quản lý khoa </span>
                         </a>
                     </li>
 
                     <li class="side-nav-item">
-                        <a href="/major" class="side-nav-link">
+                        <a href="/admin/major" class="side-nav-link">
                             <i class="uil-bag"></i>
                             <span> Quản lý ngành </span>
                         </a>
                     </li>
 
                     <li class="side-nav-item">
-                        <a href="/classroom" class="side-nav-link">
+                        <a href="/admin/classroom" class="side-nav-link">
                             <i class="uil-receipt-alt"></i>
                             <span> Quản lý lớp </span>
                         </a>
                     </li>
 
                     <li class="side-nav-item">
-                        <a href="/subject" class="side-nav-link">
+                        <a href="/admin/subject" class="side-nav-link">
                             <i class="uil-swatchbook"></i>
                             <span> Quản lý môn học </span>
                         </a>
                     </li>
 
                     <li class="side-nav-item">
-                        <a href="/teacher" class="side-nav-link">
+                        <a href="/admin/teacher" class="side-nav-link">
                             <i class="uil-book-reader"></i>
                             <span> Quản lý giáo viên </span>
                         </a>
                     </li>
 
                     <li class="side-nav-item">
-                        <a href="/student" class="side-nav-link">
+                        <a href="/admin/student" class="side-nav-link">
                             <i class="uil-users-alt"></i>
                             <span> Quản lý sinh viên </span>
                         </a>
                     </li>
 
                     <li class="side-nav-item">
-                        <a href="/module_subject" class="side-nav-link">
+                        <a href="/admin/module_subject" class="side-nav-link">
                             <i class="uil-book-open"></i>
                             <span> Quản lý học phần </span>
                         </a>
@@ -242,7 +242,7 @@
                     <div class="offcanvas-header">
                         <h5 class="offcanvas-title">Cập nhật sinh viên</h5>
                     </div>
-                    <form th:action="@{/updateStudent}" th:object="${student}" method="post">
+                    <form th:action="@{/admin/updateStudent}" th:object="${student}" method="post">
                         <div class="offcanvas-body" >
                             <div class="row" style="margin: 0;">
             

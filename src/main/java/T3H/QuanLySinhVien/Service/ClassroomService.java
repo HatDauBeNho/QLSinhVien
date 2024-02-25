@@ -41,6 +41,10 @@ public class ClassroomService {
     {
         classroomRepository.deleteClassroomById(id);
     }
+    public List<ClassroomConverter> searchByClassroomname(@PathVariable String searchString)
+    {
 
+        return classroomRepository.searchByClassroomname(searchString);
+    }
 
 }
